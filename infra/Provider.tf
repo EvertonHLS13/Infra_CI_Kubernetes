@@ -34,7 +34,14 @@ terraform {
   }
 }
 
+# Provider principal
 provider "aws" {
+  region = "us-east-2"
+}
+
+# Provider temporário para recuperar recursos antigos do state
+provider "aws" {
+  alias  = "homolog"
   region = "us-east-2"
 }
 
