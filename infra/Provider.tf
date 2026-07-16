@@ -9,13 +9,13 @@ terraform {
       version = ">= 5.0"
     }
 
-
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = ">= 2.20"
     }
 
   }
+
 }
 
 
@@ -48,11 +48,12 @@ provider "kubernetes" {
       "eks",
       "get-token",
       "--cluster-name",
-      var.cluster_name
+      var.cluster_name,
+      "--region",
+      "us-east-2"
     ]
 
   }
-
 
 }
 
@@ -85,8 +86,7 @@ resource "kubernetes_service_v1" "LoadBalancer" {
 
     port {
 
-      port = 8000
-
+      port        = 8000
       target_port = 8000
 
     }
@@ -96,6 +96,5 @@ resource "kubernetes_service_v1" "LoadBalancer" {
 
 
   }
-
 
 }
