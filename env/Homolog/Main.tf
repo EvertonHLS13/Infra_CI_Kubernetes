@@ -4,10 +4,6 @@ module "prod" {
 
   cluster_name = "homolog2"
 
-  providers = {
-    aws = aws
-  }
-
 }
 
 
