@@ -1,7 +1,5 @@
-module "prod" {
+output "IP_db" {
 
-  source = "../../infra"
-
-  cluster_name = "homolog2"
+  value = module.homolog.IP
 
 }
