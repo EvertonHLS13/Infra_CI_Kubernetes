@@ -1,4 +1,6 @@
 resource "aws_db_instance" "default" {
+  count = 0
+
   allocated_storage    = 10
   db_name              = "root"
   engine               = "postgres"
@@ -12,5 +14,5 @@ resource "aws_db_instance" "default" {
 }
 
 output "IP" {
-  value = aws_db_instance.default.address
+  value = length(aws_db_instance.default) > 0 ? aws_db_instance.default[0].address : null
 }
