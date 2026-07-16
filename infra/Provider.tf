@@ -15,7 +15,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-2"
 }
 
 provider "kubernetes" {
@@ -25,11 +25,14 @@ provider "kubernetes" {
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
+
     args = [
       "eks",
       "get-token",
       "--cluster-name",
-      var.cluster_name
+      var.cluster_name,
+      "--region",
+      "us-east-2"
     ]
   }
 }
