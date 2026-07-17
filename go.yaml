@@ -8,6 +8,7 @@ metadata:
 
 spec:
   replicas: 3
+  revisionHistoryLimit: 3
 
   selector:
     matchLabels:
@@ -15,6 +16,9 @@ spec:
 
   strategy:
     type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
 
   template:
     metadata:
@@ -23,10 +27,10 @@ spec:
 
     spec:
       restartPolicy: Always
+      terminationGracePeriodSeconds: 30
 
       containers:
         - name: go
-
           image: evertonhls/curso-ci-4-projeto-inicial:latest
           imagePullPolicy: Always
 
@@ -75,8 +79,9 @@ spec:
               path: /
               port: 8000
             initialDelaySeconds: 15
-            periodSeconds: 5
-            timeoutSeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
             failureThreshold: 6
 
           livenessProbe:
@@ -84,6 +89,6 @@ spec:
               path: /
               port: 8000
             initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 3
+            periodSeconds: 15
+            timeoutSeconds: 5
             failureThreshold: 3
