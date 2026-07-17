@@ -18,10 +18,7 @@ spec:
       nome: go
 
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
+    type: Recreate
 
   template:
     metadata:
